@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<!--//作用: 就是规定 angular这个对象起作用的范围  也就是规定管理边界-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        .bg-red{
+            background: red;
+        }
+        .bg-limegreen{
+            background: limegreen;
+        }
+    </style>
+</head>
+<body ng-controller="controller"><!--规定controller这个控制器的控制范围-->
+    {{message}}<!--作为文本出现-->
+    <input type="text" ng-model="message"/><!-- 它实现了双向绑定 -->
+
+    <div ng-if="false">ng-if</div> <!--如果在一个元素上绑定 ng-if="true" 那么这个元素将被渲染-->
+    <div ng-if="111">ng-if</div>
+
+    <div ng-show="true">ng-show--true</div>
+    <div ng-show="false">ng-show--false</div>
+    <div ng-hide="true">ng-hide--true</div>
+    <div ng-hide="false">ng-hide--false</div>
+
+    <div ng-repeat="value in obj"><!--绑定这个指令的 dom元素 会被重复渲染-->
+        <div ng-class="id">{{value.id}}</div><!--代替class-->
+        <div ng-class="content">{{value.content}}</div>
+    </div>
+
+    <img ng-src="{{path}}" alt=""/>
+    <button ng-click="fn()" ng-style="{background:ok?'pink':'#ccc',width:ok?'200px':'100px'}">{{btn}}</button>
+</body>
+    <script src="./js/angular.min.js"></script>
+</html>
+<script>
+    angular.module("myApp",[])
+            .controller("controller",function($scope){
+                //它是angular 里面的 model 数据模型 -> 就是数据
+                $scope.message = "hello angular!";
+                $scope.btn = "点击";
+                $scope.obj = [
+                    {
+                        id:0,
+                        content:"李萍0"
+                    },
+                    {
+                        id:1,
+                        content:"李萍1"
+                    },
+                    {
+                        id:2,
+                        content:"李萍2"
+                    }
+                ];
+                $scope.id = "bg-red";
+                $scope.path = "./image.png";
+                $scope.fn = function(){
+                    $scope.ok = !$scope.ok;
+                    if($scope.id == "bg-red" || $scope.path == "./image.png"){
+                        $scope.id = "bg-limegreen";
+                        $scope.path = "./logo_01.png";
+                    }else{
+                        $scope.id = "bg-red";
+                        $scope.path = "./image.png";
+                    }
+                };
+            });
+
+
+           
+
+</script>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="app">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+</head>
+<body ng-controller="controller">
+	<div>{{message}}</div>
+	<div>{{price | currency}}</div>
+	<div>{{price | currency : "￥"}}</div>
+	<div>{{1504509795405 | date }}</div>
+	<div>{{1504509795405 | date : "yyyy-MM-dd : hh ss EEEE"}}</div>
+	<div>{{array | filter : lp}}</div>
+	<hr>
+	<div>{{array | filter : input}}</div>
+	<input type="text" ng-model="input">
+	<div>{{array | filter : fn}}</div>
+	<hr>
+	<div>{{array | limitTo}}</div>
+	<hr>
+	<div>{{array | limitTo : 2}}</div>
+	<hr/>
+	<div>{{"hello" | uppercase}}</div>
+	<div>{{"HELLO" | lowercase}}</div>
+	<hr/>
+	<div>{{ num | number : 3 }}</div>
+	<hr/>
+	<div>{{ array | orderBy : '-age' }}</div>
+</body>
+<script type="text/javascript" src="./js/angular.min.js"></script>
+<script type="text/javascript">
+	//过滤器
+	angular.module("app",[])
+		.controller("controller",['$scope',function(scope){
+				scope.message = "hello";
+				scope.price = 1000;
+				scope.array = [
+					{"name":"lp","age":21},
+					{"name":"lp2","age":22},
+					{"name":"lp3","age":23}
+				];
+				scope.fn = function(date){
+					return date.age<=22;
+				};
+				scope.num = 123456;
+		}])
+</script>
+</html>
